@@ -18,7 +18,22 @@ npm run build
 npm run preview
 ```
 
-The production build is in `dist/`; serve that directory at the origin root over HTTPS with normal static-file hosting. Test service-worker behavior using the production build: the development server does not enable the production service worker. Vite's preview server is for local testing, not production hosting.
+The production build is in `docs/` and uses the `/magic-fairy-glasses/` base path. Test service-worker behavior using the production build: the development server does not enable the production service worker. Vite's preview server is for local testing, not production hosting.
+
+## Deploying to GitHub Pages
+
+In the repository's **Settings → Pages**, select **Deploy from a branch**, branch **main**, and folder **/docs**. The site will be available at <https://chriwim.github.io/magic-fairy-glasses/>.
+
+Build locally and commit the generated files along with your source changes:
+
+```sh
+npm run build
+git add -A
+git commit -m "Update site"
+git push origin main
+```
+
+Rebuild before each deployment; GitHub Pages serves the committed `docs/` files and does not run the build. The `public/` directory contains static source assets that Vite copies into `docs/`. For a different repository name or a custom domain, adjust the `base` setting in `vite.config.ts` before building.
 
 Open the app once online and wait for the offline-ready message. In Chrome on Android, use the browser's **Install app** or **Add to Home screen** menu, then open the installed app. After the first successful cache, the app shell and all bundled fairy assets can load offline; an interrupted initial cache, a browser-cleared cache, updates, or installation/setup of the device's AR runtime may still require a network connection. Updates are offered in the app rather than applied during play.
 

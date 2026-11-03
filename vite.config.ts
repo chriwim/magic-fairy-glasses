@@ -2,6 +2,10 @@ import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  base: "/magic-fairy-glasses/",
+  build: {
+    outDir: "docs"
+  },
   plugins: [
     VitePWA({
       registerType: "prompt",
